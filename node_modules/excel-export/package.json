@@ -1,0 +1,55 @@
+{
+  "name": "excel-export",
+  "version": "0.4.1",
+  "description": "Simple data set export to Excel xlsx file",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/main"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/functionscope/Node-Excel-Export"
+  },
+  "keywords": [
+    "Excel",
+    "xlsx"
+  ],
+  "author": {
+    "name": "Ber-Lin Lai",
+    "email": "berlin.lai@gmail.com"
+  },
+  "license": "BSD",
+  "dependencies": {
+    "collections": "^1.2.1",
+    "node-zip": "1.x"
+  },
+  "devDependencies": {
+    "mocha": "",
+    "should": ""
+  },
+  "gitHead": "ea739b76dd3dcb7fe4905de37cb3cc5cd9c5ddd3",
+  "bugs": {
+    "url": "https://github.com/functionscope/Node-Excel-Export/issues"
+  },
+  "homepage": "https://github.com/functionscope/Node-Excel-Export",
+  "_id": "excel-export@0.4.1",
+  "_shasum": "8da7dd51ba0a6b25f68f397a18712267e7df2908",
+  "_from": "excel-export@*",
+  "_npmVersion": "1.4.23",
+  "_npmUser": {
+    "name": "functionscope",
+    "email": "berlin.lai@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "functionscope",
+      "email": "berlin.lai@gmail.com"
+    }
+  ],
+  "dist": {
+    "shasum": "8da7dd51ba0a6b25f68f397a18712267e7df2908",
+    "tarball": "http://registry.npmjs.org/excel-export/-/excel-export-0.4.1.tgz"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/excel-export/-/excel-export-0.4.1.tgz"
+}
