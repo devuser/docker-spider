@@ -1,3 +1,8 @@
+//抓取大麦网27个关键城市的场馆清单
+//启用strict模式
+//@author: pythoner@icloud.com
+//@since: 20151018
+'use strict';
 var express = require('express');
 var url = require('url'); //解析操作url
 var superagent = require('superagent'); //这三个外部依赖不要忘记npm install
@@ -6,6 +11,8 @@ var eventproxy = require('eventproxy');
 var csv = require('csv');
 
 //大麦北京市场馆库
+//定义Venue类
+var venueList = [];
 var venue_ids  = [];
 var venue_names  = [];
 var venue_cityids  = [];
@@ -53,7 +60,7 @@ var targetUrls = [
 epcity.after('city_by_city', targetUrls.length, function(cityurls){
     console.log("begin");
     // console.log(targetUrls);
-    realcount = 0;
+    let realcount = 0;
     var venue_name ="";
     var venue_id = "";
     var venue_address = "";
@@ -64,7 +71,7 @@ epcity.after('city_by_city', targetUrls.length, function(cityurls){
     var venue_area = "";
     var venue_fullhref = "";
     var venue_offer = "";
-    for (i=0;i<venue_names.length;i++){
+    for (var i=0;i<venue_names.length;i++){
             venue_name = venue_names[i];
             venue_id = venue_ids[i];
             venue_address = venue_addresss[i];
@@ -118,7 +125,7 @@ targetUrls.forEach(function(targetUrl){
                             return;
                     }
                 });
-                for(i=0;i<pagecount;i++){
+                for(var i=0;i<pagecount;i++){
                     pageurls.push(pageurlprefix + (i+1));
                 }
                 // console.log(pageurls);

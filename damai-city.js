@@ -1,4 +1,6 @@
+'use strict';
 var express = require('express');
+
 var url = require('url');
 var superagent = require('superagent');
 var cheerio = require('cheerio');

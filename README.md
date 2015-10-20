@@ -231,4 +231,26 @@ http://venue.damai.cn/search.aspx?cityID=2103
 
 运行命令 `node damai-spider.js`
 
+## 引入strict模式
+确认您的node版本在4.2.1及以上版本， 在Node.js源文件头部增加一行, 注意一定在源代码的首行。 前头自然可以出现双斜线的注释。
+
+```
+'use strict';
+```
+
+运行  `time node  damai-spider.js` 耗费时间如下:
+
+```
+
+get all citys.count 27
+venue_count: 3316
+end
+
+real    0m4.265s
+user    0m1.800s
+sys    0m0.680s
+```
+
+上述结果运行于Docker容器中。
+
 稍后继续写.....
