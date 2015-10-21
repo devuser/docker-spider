@@ -284,4 +284,48 @@ sys    0m0.680s
 
 上述结果运行于Docker容器中。
 
+## 使用原型方法定义类
+
+```
+function Venue(venue_id,venue_name,
+    venue_cityid, venue_city,
+    venue_area,
+    venue_fullhref,
+    venue_type,
+    venue_address,
+    venue_matches,
+    venue_offer) {
+　　this.venue_id = venue_id;
+　　this.venue_name = venue_name;
+　　this.venue_cityid = venue_cityid;
+　　this.venue_city = venue_city;
+　　this.venue_area = venue_area;
+　　this.venue_fullhref = venue_fullhref;
+　　this.venue_type = venue_type;
+　　this.venue_address = venue_address;
+　　this.venue_matches = venue_matches;
+　　this.venue_offer = venue_offer;
+}
+
+//var objVeneue = new Venue("1", "The first Venue");
+//console.log(objVeneue.venue_name);
+```
+
+## 定制场馆排序
+
+```
+venueList.sort(sortVenue);
+function sortVenue(a,b)
+{
+    let acityorder = cityMap[a.venue_cityid];
+    let bcityorder = cityMap[b.venue_cityid];
+    // console.log(a.venue_cityid, b.venue_cityid);
+    // console.log(acityorder, bcityorder);
+    if ((acityorder - bcityorder)==0) {
+        return parseInt(a.venue_id) > parseInt(b.venue_id);
+    }
+    return  (acityorder > bcityorder);
+}
+```
+
 稍后继续写.....
