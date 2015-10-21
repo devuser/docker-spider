@@ -43,6 +43,13 @@ root@832335e1f42f:/usr/src/myapp# node -v
 v4.2.1
 ```
 
+## 测试网络
+在Docker容器中尝试运行如下命令，确定您可以访问大麦网
+
+```
+curl http://venue.damai.cn
+```
+
 ## 尝试编写一个HelloWorld热身
 
 ```
@@ -237,6 +244,30 @@ http://venue.damai.cn/search.aspx?cityID=2103
 ```
 'use strict';
 ```
+
+引入strict模式后，可以使用关键字`let`可以让我们将变量的作用范围限定在一个代码块中
+
+```
+
+'use strict';
+if (1) {
+    let b = 2;
+    console.log(b);       //2
+}
+console.log(typeof b); //undefined
+```
+
+严格模式的一大目标是让你能更快更方便的调试。
+
+运行环境在发现问题时显性的抛出错误比默不做声的失败或怪异行事(未开启严格模式的JavaScript运行环境经常这样)要好。
+
+严格模式会抛出更多错误,但这是好事, 因为这些错误会唤起你注意并修复很多以前很难被发现的潜在问题。
+
+低版本的Node.js可能需要使用参数 `node --harmony damai-spider.js`。
+
+但是我在4.2.1版本测试，无需关心这些参数，更不需要使用awk去启动strict模式的node-shell。
+
+当然我是非完整性测试。
 
 运行  `time node  damai-spider.js` 耗费时间如下:
 

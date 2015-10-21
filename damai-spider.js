@@ -10,6 +10,31 @@ var cheerio = require('cheerio');
 var eventproxy = require('eventproxy');
 var csv = require('csv');
 
+//
+function Venue(venue_id,venue_name,
+    venue_cityid, venue_city,
+    venue_area,
+    venue_fullhref,
+    venue_type,
+    venue_address,
+    venue_matches,
+    venue_offer) {
+　　this.venue_id = venue_id;
+　　this.venue_name = venue_name;
+　　this.venue_cityid = venue_cityid;
+　　this.venue_city = venue_city;
+　　this.venue_area = venue_area;
+　　this.venue_fullhref = venue_fullhref;
+　　this.venue_type = venue_type;
+　　this.venue_address = venue_address;
+　　this.venue_matches = venue_matches;
+　　this.venue_offer = venue_offer;
+}
+
+//var objVeneue = new Venue("1", "The first Venue");
+//console.log(objVeneue.venue_name);
+
+
 //大麦北京市场馆库
 //定义Venue类
 var venueList = [];
@@ -56,22 +81,29 @@ var targetUrls = [
     "http://venue.damai.cn/search.aspx?cityID=1077",
     "http://venue.damai.cn/search.aspx?cityID=2103",
 ];
+
+let cityMap = {};
+targetUrls.forEach(function( cityurl, index) {
+    let cityID = parseInt(/cityID=(\d+)/.exec(cityurl)[1]);
+    cityMap[cityID] = index+1;
+})
+// console.log(cityMap)
 //@todo: 希望遍历上述27个城市后执行如下代码
 epcity.after('city_by_city', targetUrls.length, function(cityurls){
     console.log("begin");
     // console.log(targetUrls);
     let realcount = 0;
-    var venue_name ="";
-    var venue_id = "";
-    var venue_address = "";
-    var venue_type = "";
-    var venue_matches = "";
-    var venue_city = "";
-    var venue_cityid = "";
-    var venue_area = "";
-    var venue_fullhref = "";
-    var venue_offer = "";
-    for (var i=0;i<venue_names.length;i++){
+    let venue_name ="";
+    let venue_id = "";
+    let venue_address = "";
+    let venue_type = "";
+    let venue_matches = "";
+    let venue_city = "";
+    let venue_cityid = "";
+    let venue_area = "";
+    let venue_fullhref = "";
+    let venue_offer = "";
+    for (let i=0;i<venue_names.length;i++){
             venue_name = venue_names[i];
             venue_id = venue_ids[i];
             venue_address = venue_addresss[i];
@@ -84,20 +116,41 @@ epcity.after('city_by_city', targetUrls.length, function(cityurls){
             venue_offer = venue_offers[i];
             if (!venue_name.startsWith("测试部专用")) {
                 realcount += 1;
-                console.log('"' + venue_id + '"' + ";" + '"'+venue_name+'"', ";", '"'+venue_cityid+'"',";", '"'+venue_city+'"',";", '"'+venue_area+'"',";", '"'+venue_address+'"',";", '"'+venue_type+'"',";", '"'+ venue_matches+'"',";", '"'+venue_offer+'"',";", '"'+venue_fullhref+'"');
+                const objVeneue = new Venue(venue_id,venue_name,
+                    venue_cityid, venue_city,
+                    venue_area,
+                    venue_fullhref,
+                    venue_type,
+                    venue_address,
+                    venue_matches,
+                    venue_offer);
+                venueList.push(objVeneue);
+                //console.log('"' + venue_id + '"' + ";" + '"'+venue_name+'"', ";", '"'+venue_cityid+'"',";", '"'+venue_city+'"',";", '"'+venue_area+'"',";", '"'+venue_address+'"',";", '"'+venue_type+'"',";", '"'+ venue_matches+'"',";", '"'+venue_offer+'"',";", '"'+venue_fullhref+'"');
             }
     }
+    venueList.sort(sortVenue);
+    venueList.forEach(function (v) {
+        console.log('"' + v.venue_id + '"' + ";" + '"'+v.venue_name+'"', ";", '"'+v.venue_cityid+'"',";", '"'+v.venue_city+'"',";", '"'+v.venue_area+'"',";", '"'+v.venue_address+'"',";", '"'+v.venue_type+'"',";", '"'+ v.venue_matches+'"',";", '"'+v.venue_offer+'"',";", '"'+v.venue_fullhref+'"');
+    })
     console.log("get all citys.count " + cityurls.length);
     console.log("venue_count: " + realcount);
     console.log("end");
 
 });
-function sortNumber(a,b)
+
+//如下场馆排序算法需要重新思考
+function sortVenue(a,b)
 {
-    const resa = parseInt(/cityID=(\d+)$/.exec(a)[1]);
-    const resb = parseInt(/cityID=(\d+)$/.exec(b)[1]);
-    return  resa-resb;
+    let acityorder = cityMap[a.venue_cityid];
+    let bcityorder = cityMap[b.venue_cityid];
+    // console.log(a.venue_cityid, b.venue_cityid);
+    // console.log(acityorder, bcityorder);
+    if ((acityorder - bcityorder)==0) {
+        return parseInt(a.venue_id) > parseInt(b.venue_id);
+    }
+    return  (acityorder > bcityorder);
 }
+
 // targetUrls.sort(sortNumber);
 targetUrls.forEach(function(targetUrl){
 
@@ -106,9 +159,9 @@ targetUrls.forEach(function(targetUrl){
             // console.log(res);
             // console.log(targetUrl);
             const $ = cheerio.load(res.text);
-            var pagecount = 1;
-            var pageurlprefix = "";
-            var pageurls = [];
+            let pagecount = 1;
+            let pageurlprefix = "";
+            let pageurls = [];
             const cityID = parseInt(/cityID=(\d+)/.exec(targetUrl)[1]);
             //通过CSS selector来筛选数据
             $('.ml10').each(function (idx, element){
@@ -125,7 +178,7 @@ targetUrls.forEach(function(targetUrl){
                             return;
                     }
                 });
-                for(var i=0;i<pagecount;i++){
+                for(let i=0;i<pagecount;i++){
                     pageurls.push(pageurlprefix + (i+1));
                 }
                 // console.log(pageurls);
