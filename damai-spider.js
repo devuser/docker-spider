@@ -90,7 +90,7 @@ targetUrls.forEach(function( cityurl, index) {
 // console.log(cityMap)
 //@todo: 希望遍历上述27个城市后执行如下代码
 epcity.after('city_by_city', targetUrls.length, function(cityurls){
-    console.log("begin");
+    // console.log("begin");
     // console.log(targetUrls);
     let realcount = 0;
     let venue_name ="";
@@ -130,11 +130,18 @@ epcity.after('city_by_city', targetUrls.length, function(cityurls){
     }
     venueList.sort(sortVenue);
     venueList.forEach(function (v) {
-        console.log('"' + v.venue_id + '"' + ";" + '"'+v.venue_name+'"', ";", '"'+v.venue_cityid+'"',";", '"'+v.venue_city+'"',";", '"'+v.venue_area+'"',";", '"'+v.venue_address+'"',";", '"'+v.venue_type+'"',";", '"'+ v.venue_matches+'"',";", '"'+v.venue_offer+'"',";", '"'+v.venue_fullhref+'"');
+        const csvstring  = [v.venue_id,v.venue_name,
+            v.venue_cityid,v.venue_city,
+            v.venue_area,v.venue_address,
+            v.venue_type,
+            venue_matches,
+            venue_offer,
+            venue_fullhref].map(function(el) { return '"'+el+'"';}).join(";");
+        console.log(csvstring);
     })
-    console.log("get all citys.count " + cityurls.length);
-    console.log("venue_count: " + realcount);
-    console.log("end");
+    //console.log("get all citys.count " + cityurls.length);
+    //console.log("venue_count: " + realcount);
+    //console.log("end");
 
 });
 

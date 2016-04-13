@@ -1,5 +1,15 @@
 # 大麦爬虫安装指南
-如下环境及代码运行于Docker 1.7 Node.js® 4.2.1
+如下环境及代码运行于Docker 1.7 Node.js® 4.4.3
+
+## Quick Start
+
+如果您非常熟悉Docker和NodeJS的话，建议您按照如下步骤快速构建。
+
+1. 在当前文件夹之行如下命令构建容器  `docker build  --no-cache -t  xiehuanang/node .`
+2. 启动容器 `docker run -it --rm --name node-spider  -v /Users/devuser/working/docker-spider:/usr/src/myapp -w /usr/src/myapp -p 43000:3000 -p 48080:8080 -p 40080:80 xiehuanang/node /bin/bash`
+3. 执行命令导出大麦网的城市清单  `node damai-city.js`
+4. 执行命令导出大麦网的场馆清单 `node damai-spider.js`
+
 
 ## 制作Docker
 1. Windows／MacOS用户请谷歌并下载`boot2docker`
@@ -20,10 +30,10 @@
 - 上述命令会从官网下载指定版本的 `Node.js®`
 ```
 
-目前Dockerfile中指定下载4.2.1版本的，您可以打开Dockerfile修改版本号
+目前Dockerfile中指定下载4.4.3版本的，您可以打开Dockerfile修改版本号
 
 ```
-ENV NODE_VERSION 4.2.1
+ENV NODE_VERSION 4.4.3
 ```
 
 ## 启动Docker容器
@@ -36,11 +46,11 @@ ENV NODE_VERSION 4.2.1
 docker run -it --rm --name node-spider  -v /Users/devuser/working/docker-spider:/usr/src/myapp -w /usr/src/myapp node-spider /bin/bash
 ```
 
-运行`node -v`确认`Node.js®`的版本号是4.2.1
+运行`node -v`确认`Node.js®`的版本号是4.4.3
 
 ```
 root@832335e1f42f:/usr/src/myapp# node -v
-v4.2.1
+v4.4.3
 ```
 
 ## 测试网络
@@ -239,7 +249,7 @@ http://venue.damai.cn/search.aspx?cityID=2103
 运行命令 `node damai-spider.js`
 
 ## 引入strict模式
-确认您的node版本在4.2.1及以上版本， 在Node.js源文件头部增加一行, 注意一定在源代码的首行。 前头自然可以出现双斜线的注释。
+确认您的node版本在4.4.3及以上版本， 在Node.js源文件头部增加一行, 注意一定在源代码的首行。 前头自然可以出现双斜线的注释。
 
 ```
 'use strict';
@@ -265,7 +275,7 @@ console.log(typeof b); //undefined
 
 低版本的Node.js可能需要使用参数 `node --harmony damai-spider.js`。
 
-但是我在4.2.1版本测试，无需关心这些参数，更不需要使用awk去启动strict模式的node-shell。
+但是我在4.4.3版本测试，无需关心这些参数，更不需要使用awk去启动strict模式的node-shell。
 
 当然我是非完整性测试。
 
@@ -329,5 +339,22 @@ function sortVenue(a,b)
 ```
 
 希望按照城市ID和场馆ID排序。
+
+# 抓取大麦网演出赛事
+查询全部项目的网址: `http://www.damai.cn/projectlist.do`
+
+演出赛事系列分类清单
+1. 演唱会 网址: `http://s.damai.cn/ticket/concert.html`
+2. 音乐会
+3. 话剧歌剧
+4. 舞蹈芭蕾
+5. 曲苑杂坛
+6. 体育比赛 网址: `http://s.damai.cn/ticket/sports.html`
+7. 度假休闲
+8. 周边商品
+9. 活动
+10. 超级票
+11. 儿童亲子
+12. 旅游演艺|韩流地带
 
 稍后继续写.....
