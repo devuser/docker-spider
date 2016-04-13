@@ -3,7 +3,7 @@
 
 ## Quick Start
 
-如果您非常熟悉Docker和NodeJS的话，建议您按照如下步骤快速构建。
+如果您非常熟悉Docker和Node.js的话，建议您按照如下步骤快速构建。
 
 1. 在当前文件夹之行如下命令构建容器  `docker build  --no-cache -t  xiehuanang/node .`
 2. 启动容器 `docker run -it --rm --name node-spider  -v /Users/devuser/working/docker-spider:/usr/src/myapp -w /usr/src/myapp -p 43000:3000 -p 48080:8080 -p 40080:80 xiehuanang/node /bin/bash`
@@ -111,7 +111,7 @@ cheerio 充当服务器端的jQuery功能，我们先使用它的.load()来载�
 cheerio 支持CSS选择器，ID选择器，类型选择器。
 
 ## EventProxy
-使用eventproxy作为时间代理，简化编程， 特别对于不太熟悉NodeJS的同学来说，第一次编写爬虫，需要居于NodeJS基础事件模型来处理异步事件， 是不可能。
+使用eventproxy作为时间代理，简化编程， 特别对于不太熟悉Node.js的同学来说，第一次编写爬虫，需要居于Node.js基础事件模型来处理异步事件， 是不可能。
 
 什么异步事件呢？ 抓取主页，然后顺序抓取网页内容中若干二级页面，就出现了异步事件。 当然严格说起来，抓取主页时就出现了异步事件。
 - 抓取主页
