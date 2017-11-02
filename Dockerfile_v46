@@ -46,23 +46,23 @@ RUN npm install -g express \
     &&  npm install -g grunt-cli    \
     &&  npm install -g yo    \
     &&  npm install -g bower    \
-    &&  npm install -g vue@2.0.5    \
-    &&  npm install -g vue-template-compiler@2.0.5    \
+    &&  npm install -g vue@"<2.0.0"    \
+    &&  npm install -g vue-template-compiler@"<2.0.0"    \
     &&  npm install -g gulp    \
-    &&  npm install -g vue-cli    \
-    &&  npm install -g vuetable  \
-    &&  npm install -g vue-resource  \
-    &&  npm install -g vue-router  \
-    &&  npm install -g vue-tables  \
-    &&  npm install -g vue-lazyload \
-    &&  npm install -g vue-validator  \
+    &&  npm install -g vue-cli"<2.0.0"    \
+    &&  npm install -g vuetable"<2.0.0"  \
+    &&  npm install -g vue-resource"<2.0.0"  \
+    &&  npm install -g vue-router"<2.0.0"  \
+    &&  npm install -g vue-tables"<2.0.0"  \
+    &&  npm install -g vue-lazyload"<2.0.0" \
+    &&  npm install -g vue-validator"<2.0.0"  \
     &&  npm install -g react-native-cli \
     &&  npm install -g electron-prebuilt \
     &&  npm install -g scrat \
     &&  npm install -g cross-env \
     &&  npm install -g koa \
     &&  npm install -g iview \
-    &&  npm install -g vue-strap
+    &&  npm install -g vue-strap"<2.0.0"
     # &&  npm install -g N3-components
 
 # RUN npm install -g grunt-cli    &&  \
